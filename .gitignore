@@ -24,6 +24,7 @@ build/mitsuba-msvc2017.sdf
 build/mitsuba-msvc2017.suo
 build/mitsuba-msvc2017.vcxproj.user
 build/.vs/**/*
+build/cmake
 data/windows/mitsuba_res.res
 dist
 
@@ -48,3 +49,6 @@ mitsuba.*.log
 .settings
 .cproject
 .project
+
+# VS Code
+.vscode
