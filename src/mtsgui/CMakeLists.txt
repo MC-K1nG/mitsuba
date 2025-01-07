@@ -17,7 +17,6 @@ if (WIN32)
   set(QT_USE_QTMAIN 0)
   set(MTS_EXE_TYPE "WIN32")
 endif()
-include(${QT_USE_FILE})
 
 # Add all the sources
 set (UI_FILES
@@ -124,14 +123,14 @@ endif()
 
 
 # Process the UI files through uic and store the generated headers
-QT4_WRAP_UI(UI_HDRS ${UI_FILES})
+qt5_wrap_ui(UI_HDRS ${UI_FILES})
 source_group("UI Files" FILES ${UI_FILES})
 
 # Add the directory where the generated headers are
 include_directories(. ${CMAKE_CURRENT_BINARY_DIR})
 
 # Process the resource files through rcc and store the generated cxx files
-QT4_ADD_RESOURCES(RC_SRCS ${RC_FILES})
+qt5_add_resources(RC_SRCS ${RC_FILES})
 source_group("Qt Resources" FILES ${RC_FILES})
 
 # Add our own qtmain and use the static file dialogs
@@ -141,15 +140,14 @@ if (WIN32)
 endif()
 
 # Generate the moc files
-QT4_WRAP_CPP(MOC_HDRS ${HDRS_UI} ${HDRS_QOBJECT})
+qt5_wrap_cpp(MOC_HDRS ${HDRS_UI} ${HDRS_QOBJECT})
 
 # Create a source group for the generated files
 source_group("Qt Generated" FILES ${MOC_HDRS} ${UI_HDRS} ${RC_SRCS})
 
 include_directories(${XERCES_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS})
 add_definitions(${GLEW_DEFINITIONS})
-
-set(LIBS ${QT_LIBRARIES} ${GLEW_LIBRARIES})
+set(LIBS ${Qt5_LIBRARIES} ${GLEW_LIBRARIES})
 # This static library is built by the mtsimport target (src/converter)
 if (COLLADA_FOUND)
   if (NOT TARGET mtsconverter_lib)
